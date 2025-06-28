@@ -1,15 +1,32 @@
-index.html
 <!DOCTYPE html>
 <html lang="pt">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>H369 App</title>
+    <title>H369 – Consulta Homeopática</title>
   </head>
   <body>
-    <div id="root"></div>
-<script type="module" src="/main.tsx"></script>
+    <h1>H369 - Consulta Homeopática</h1>
+    <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
+    <input type="text" id="nome" placeholder="Nome completo" />
+    <input type="date" id="data" />
+    <input type="text" id="local" placeholder="Local de nascimento" />
+    <select id="sexo">
+      <option>Masculino</option>
+      <option>Feminino</option>
+    </select>
+    <button onclick="consultar()">Consultar</button>
+
+    <div id="resultado"></div>
+
+    <script>
+      function consultar() {
+        const nome = document.getElementById("nome").value;
+        const data = document.getElementById("data").value;
+        const local = document.getElementById("local").value;
+        const sexo = document.getElementById("sexo").value;
+        document.getElementById("resultado").innerText =
+          `Resultado simulado para ${nome}, nascido em ${local}, sexo ${sexo}`;
+      }
+    </script>
   </body>
 </html>
- 
