@@ -420,5 +420,4 @@ export function corDoReino(reino: Reino): string {
   '28-12': 'Mineral',
   '29-12': 'Animal',
   '30-12': 'Vegetal',
-  '31-12': 'Mineral',
-
+  '31-12': 'Mineral', 
