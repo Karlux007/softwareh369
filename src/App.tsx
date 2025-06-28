@@ -1,8 +1,59 @@
+import { useState } from 'react';
+import { calcularReinoPessoal, corDoReino } from './utils/reinoPessoal';
+
 export default function App() {
+  const [nome, setNome] = useState('');
+  const [data, setData] = useState('');
+  const [local, setLocal] = useState('');
+  const [sexo, setSexo] = useState('Masculino');
+  const [reino, setReino] = useState<string | null>(null);
+
+  const handleConsulta = () => {
+    const [ano, mes, dia] = data.split('-').map(Number);
+    const resultado = calcularReinoPessoal(dia, mes);
+    setReino(resultado);
+  };
+
   return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>Bem-vindo à App H369</h1>
-      <p>Consulta os teus Reinos Homeopáticos com base na tua data de nascimento.</p>
+    <div style={{ padding: '2rem', textAlign: 'center' }}>
+      <h1>H369 - Consulta Homeopática</h1>
+      <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
+
+      <input
+        type="text"
+        placeholder="Nome completo"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+        style={{ margin: '5px' }}
+      />
+
+      <input
+        type="date"
+        value={data}
+        onChange={(e) => setData(e.target.value)}
+        style={{ margin: '5px' }}
+      />
+
+      <input
+        type="text"
+        placeholder="Local de nascimento"
+        value={local}
+        onChange={(e) => setLocal(e.target.value)}
+        style={{ margin: '5px' }}
+      />
+
+      <select value={sexo} onChange={(e) => setSexo(e.target.value)} style={{ margin: '5px' }}>
+        <option value="Masculino">Masculino</option>
+        <option value="Feminino">Feminino</option>
+      </select>
+
+      <button onClick={handleConsulta} style={{ margin: '5px' }}>Consultar</button>
+
+      {reino && (
+        <p style={{ color: corDoReino(reino) }}>
+          Resultado: Reino <strong>{reino}</strong> para {nome}, nascido em {local}, sexo {sexo}.
+        </p>
+      )}
     </div>
   );
 }
