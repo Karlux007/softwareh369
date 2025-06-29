@@ -11,7 +11,7 @@ export default function App() {
   const handleConsulta = () => {
     if (!data) return;
 
-    const [ano, mes, dia] = data.split('-').map(Number);
+const resultado = calcularReinoPessoal(dia, mes);
     const resultado = calcularReinoPessoal(dia, mes);
     setReino(resultado);
   };
