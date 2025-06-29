@@ -6,26 +6,12 @@ export default function App() {
   const [data, setData] = useState('');
   const [local, setLocal] = useState('');
   const [sexo, setSexo] = useState('');
-  const [reino, setReino] = useState(null);
+  const [reino, setReino] = useState<string | null>(null);
 
   const handleConsulta = () => {
-    if (!data || !data.includes('-')) {
-      setReino(null);
-      return;
-    }
-
-    const partes = data.split('-'); // yyyy-mm-dd
-    if (partes.length !== 3) {
-      setReino(null);
-      return;
-    }
-
-    const ano = Number(partes[0]);
-    const mes = Number(partes[1]);
-    const dia = Number(partes[2]);
-
+    if (!data) return;
+    const [ano, mes, dia] = data.split('-').map(Number);
     const resultado = calcularReinoPessoal(dia, mes);
-    console.log("🔎 Data:", data, "→ dia:", dia, "mes:", mes, "→ Reino:", resultado);
     setReino(resultado);
   };
 
@@ -71,12 +57,10 @@ export default function App() {
         Consultar
       </button>
 
-      {reino !== null ? (
+      {reino && (
         <p style={{ color: corDoReino(reino) }}>
           Resultado: Reino <strong>{reino}</strong> para {nome}, nascido em {local}, sexo {sexo}.
         </p>
-      ) : (
-        <p style={{ color: 'red' }}>⚠️ Nenhum Reino encontrado para esta data.</p>
       )}
     </div>
   );
