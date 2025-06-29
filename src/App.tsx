@@ -10,6 +10,7 @@ export default function App() {
 
   const handleConsulta = () => {
     if (!data) return;
+
     const [ano, mes, dia] = data.split('-').map(Number);
     const resultado = calcularReinoPessoal(dia, mes);
     setReino(resultado);
@@ -48,7 +49,7 @@ export default function App() {
         onChange={(e) => setSexo(e.target.value)}
         style={{ margin: '5px' }}
       >
-        <option value="">Seleciona o sexo</option>
+        <option value="">Selecionar sexo</option>
         <option value="Masculino">Masculino</option>
         <option value="Feminino">Feminino</option>
       </select>
