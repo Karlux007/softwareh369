@@ -11,7 +11,11 @@ export default function App() {
   const handleConsulta = () => {
     if (!data) return;
 
-const resultado = calcularReinoPessoal(dia, mes);
+    const partes = data.split('-');
+    const ano = parseInt(partes[0], 10);
+    const mes = parseInt(partes[1], 10);
+    const dia = parseInt(partes[2], 10);
+
     const resultado = calcularReinoPessoal(dia, mes);
     setReino(resultado);
   };
@@ -59,7 +63,7 @@ const resultado = calcularReinoPessoal(dia, mes);
       </button>
 
       {reino && (
-        <p style={{ color: corDoReino(reino) }}>
+        <p style={{ marginTop: '1rem', color: corDoReino(reino) }}>
           Resultado: Reino <strong>{reino}</strong> para {nome}, nascido em {local}, sexo {sexo}.
         </p>
       )}
