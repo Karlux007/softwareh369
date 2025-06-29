@@ -12,10 +12,9 @@ export default function App() {
     if (!data) return;
 
     const partes = data.split('-');
-    const ano = parseInt(partes[0], 10);
-    const mes = parseInt(partes[1], 10);
     const dia = parseInt(partes[2], 10);
-
+    const mes = parseInt(partes[1], 10);
+    const ano = parseInt(partes[0], 10);
     const resultado = calcularReinoPessoal(dia, mes);
     setReino(resultado);
   };
