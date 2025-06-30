@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { calcularReinoPessoal, corDoReino } from './utils/reinoPessoal';
+import { calcularReinoPessoal } from './utils/reinoPessoal';
 
 export default function App() {
   const [nome, setNome] = useState('');
@@ -12,9 +12,10 @@ export default function App() {
     if (!data) return;
 
     const partes = data.split('-');
-    const dia = parseInt(partes[2], 10);
-    const mes = parseInt(partes[1], 10);
     const ano = parseInt(partes[0], 10);
+    const mes = parseInt(partes[1], 10);
+    const dia = parseInt(partes[2], 10);
+
     const resultado = calcularReinoPessoal(dia, mes);
     setReino(resultado);
   };
@@ -62,8 +63,8 @@ export default function App() {
       </button>
 
       {reino && (
-        <p style={{ marginTop: '1rem', color: corDoReino(reino) }}>
-          Resultado: Reino <strong>{reino}</strong> para {nome}, nascido em {local}, sexo {sexo}.
+        <p style={{ marginTop: '10px', fontWeight: 'bold' }}>
+          Reino Homeopático: {reino}
         </p>
       )}
     </div>
