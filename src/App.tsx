@@ -48,24 +48,19 @@ export default function App() {
         style={{ margin: '5px' }}
       />
 
-      <select
-        value={sexo}
-        onChange={(e) => setSexo(e.target.value)}
-        style={{ margin: '5px' }}
-      >
-        <option value="">Selecionar sexo</option>
+      <select value={sexo} onChange={(e) => setSexo(e.target.value)} style={{ margin: '5px' }}>
+        <option value="">Seleciona o sexo</option>
         <option value="Masculino">Masculino</option>
         <option value="Feminino">Feminino</option>
       </select>
 
-      <button onClick={handleConsulta} style={{ margin: '5px' }}>
-        Consultar
-      </button>
+      <button onClick={handleConsulta} style={{ margin: '5px' }}>Consultar</button>
 
+      {/* Mostra o resultado se existir */}
       {reino && (
-        <p style={{ marginTop: '10px', fontWeight: 'bold' }}>
-          Reino Homeopático: {reino}
-        </p>
+        <div style={{ marginTop: '2rem', fontSize: '1.2rem' }}>
+          <strong>Reino Homeopático:</strong> {reino}
+        </div>
       )}
     </div>
   );
