@@ -17,15 +17,13 @@ export default function App() {
     const dia = parseInt(partes[2], 10);
 
     const resultado = obterReinoPessoal(dia, mes);
-
-    console.log("🔍 Dia:", dia, "Mês:", mes, "Resultado:", resultado);
-
+    console.log(`🔍 Dia: ${dia}, Mês: ${mes}, Resultado: ${resultado}`);
     setReino(resultado);
   };
 
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>H369 – Consulta Homeopática</h1>
+      <h1>H369 - Consulta Homeopática</h1>
       <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
 
       <input
@@ -73,4 +71,3 @@ export default function App() {
     </div>
   );
 }
-
