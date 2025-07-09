@@ -1,5 +1,3 @@
-// src/reinoPessoal.ts
-
 export function obterReinoPessoal(dia: number, mes: number): string {
   const chave = `${dia.toString().padStart(2, "0")}/${mes.toString().padStart(2, "0")}`;
 
