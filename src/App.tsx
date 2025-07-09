@@ -1,5 +1,6 @@
-import supabase from "./lib/supabaseClient";
+import { useState } from "react";
 import { calcularReinoPessoal } from "./utils/reinoPessoal";
+import supabase from "./lib/supabaseClient"; // 👈 Importa o Supabase
 
 export default function App() {
   const [nome, setNome] = useState("");
@@ -8,7 +9,8 @@ export default function App() {
   const [sexo, setSexo] = useState("");
   const [reino, setReino] = useState<string | null>(null);
 
-  const handleConsulta = () => {
+  // 👇 Atualizado para async
+  const handleConsulta = async () => {
     if (!data) return;
 
     const partes = data.split("-");
@@ -19,6 +21,27 @@ export default function App() {
     const resultado = calcularReinoPessoal(dia, mes);
     console.log(`Dia: ${dia}, Mês: ${mes}, Resultado: ${resultado}`);
     setReino(resultado);
+
+    // 👇 Grava no Supabase
+    const { error } = await supabase.from("consultas").insert([
+      {
+        dados_entrada: {
+          nome,
+          data_nasc: data,
+          local_nasc: local,
+          sexo,
+        },
+        resultado_congenitos: {
+          reino_pessoal: resultado,
+        },
+      },
+    ]);
+
+    if (error) {
+      console.error("❌ Erro ao gravar no Supabase:", error.message);
+    } else {
+      console.log("✅ Consulta gravada com sucesso!");
+    }
   };
 
   return (
@@ -63,7 +86,6 @@ export default function App() {
         Consultar
       </button>
 
-      {/* Mostra o resultado se existir */}
       {reino && (
         <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
           <strong>Reino Homeopático:</strong> {reino}
