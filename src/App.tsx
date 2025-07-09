@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { calcularReinoPessoal } from "./utils/reinoPessoal";
+import { obterReinoPessoal } from "./utils/reinoPessoal";
 
 export default function App() {
   const [nome, setNome] = useState("");
