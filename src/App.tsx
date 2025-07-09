@@ -1,5 +1,4 @@
 import { useState } from "react";
-import supabase from "./lib/supabaseClient";
 import { calcularReinoPessoal } from "./utils/reinoPessoal";
 
 export default function App() {
@@ -9,8 +8,8 @@ export default function App() {
   const [sexo, setSexo] = useState("");
   const [reino, setReino] = useState<string | null>(null);
 
-  const handleConsulta = async () => {
-    if (!nome || !data || !local || !sexo) return;
+  const handleConsulta = () => {
+    if (!data) return;
 
     const partes = data.split("-");
     const ano = parseInt(partes[0], 10);
@@ -19,32 +18,11 @@ export default function App() {
 
     const resultado = calcularReinoPessoal(dia, mes);
     setReino(resultado);
-
-    // Gravar no Supabase
-    const { error } = await supabase.from("consultas").insert([
-      {
-        dados_entrada: {
-          nome,
-          data_nasc: data,
-          local_nasc: local,
-          sexo,
-        },
-        resultado_congenitos: {
-          reino_pessoal: resultado,
-        },
-      },
-    ]);
-
-    if (error) {
-      console.error("❌ Erro ao gravar no Supabase:", error.message);
-    } else {
-      console.log("✅ Consulta gravada com sucesso!");
-    }
   };
 
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>H369 – Consulta Homeopática</h1>
+      <h1>H369 - Consulta Homeopática</h1>
       <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
 
       <input
@@ -86,7 +64,7 @@ export default function App() {
 
       {reino && (
         <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
-          <strong>Reino Homeopático (Pessoal):</strong> {reino}
+          <strong>O teu Reino é:</strong> {reino}
         </div>
       )}
     </div>
