@@ -1,6 +1,8 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = 'https://[O_TEU_PROJECT_URL].supabase.co';
-const supabaseKey = '[A_TUA_PUBLIC_ANON_KEY]';
+const supabaseUrl = "https://xxxx.supabase.co"; // ← substitui
+const supabaseKey = "eyJhbGciOi...";             // ← substitui
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export default supabase;
