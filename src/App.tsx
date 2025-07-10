@@ -8,16 +8,26 @@ export default function App() {
   const [sexo, setSexo] = useState("");
   const [reino, setReino] = useState<string | null>(null);
 
-  const handleConsulta = () => {
-    if (!data) return;
+ const handleConsulta = () => {
+  if (!data) {
+    console.log("Data não preenchida");
+    return;
+  }
 
-    console.log("Data bruta:", data); // 👈 Mostra a data recebida do input
+  const partes = data.split("-");
+  const ano = parseInt(partes[0], 10);
+  const mes = parseInt(partes[1], 10);
+  const dia = parseInt(partes[2], 10);
 
-    const [ano, mes, dia] = data.split("-").map((n) => parseInt(n, 10));
+  console.log("Data bruta:", data);
+  console.log("Dia:", dia);
+  console.log("Mês:", mes);
 
-    const resultado = obterReinoPessoal(dia, mes);
-    setReino(resultado);
-  };
+  const resultado = obterReinoPessoal(dia, mes);
+  console.log("Resultado da função:", resultado);
+
+  setReino(resultado);
+};
 
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
