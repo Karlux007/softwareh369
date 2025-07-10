@@ -9,10 +9,7 @@ export default function App() {
   const [reino, setReino] = useState<string | null>(null);
 
   const handleConsulta = () => {
-    if (!data) {
-      alert("Preenche a data!");
-      return;
-    }
+    if (!data) return;
 
     const partes = data.split("-");
     const ano = parseInt(partes[0], 10);
@@ -20,7 +17,6 @@ export default function App() {
     const dia = parseInt(partes[2], 10);
 
     const resultado = obterReinoPessoal(dia, mes);
-    console.log("🔍 Debug:", { dia, mes, resultado });
     setReino(resultado);
   };
 
@@ -68,12 +64,7 @@ export default function App() {
 
       {reino && (
         <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
-          <strong>Resultado:</strong><br />
-          Nome: {nome}<br />
-          Nascimento: {data}<br />
-          Local: {local}<br />
-          Sexo: {sexo}<br />
-          <strong>Reino Pessoal:</strong> {reino}
+          <strong>Reino Homeopático:</strong> {reino}
         </div>
       )}
     </div>
