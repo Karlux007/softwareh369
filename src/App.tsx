@@ -11,9 +11,10 @@ export default function App() {
   const handleConsulta = () => {
     if (!data) return;
 
-    const partes = data.split("-");
-    const dia = parseInt(partes[2], 10); // corrigido
-    const mes = parseInt(partes[1], 10); // corrigido
+    // Corrigir ordem da data: yyyy-mm-dd → [yyyy, mm, dd]
+    const [ano, mesStr, diaStr] = data.split("-");
+    const dia = parseInt(diaStr, 10);
+    const mes = parseInt(mesStr, 10);
 
     const resultado = obterReinoPessoal(dia, mes);
     setReino(resultado);
@@ -61,9 +62,13 @@ export default function App() {
         Consultar
       </button>
 
-   {reino && (
-  <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
-    <strong>{nome}</strong>, nascido em <strong>{local}</strong>, sexo <strong>{sexo}</strong><br />
-    <strong>Reino Homeopático:</strong> {reino}
-  </div>
-)}
+      {reino && (
+        <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
+          <strong>{nome}</strong>, nascido em <strong>{local}</strong>, sexo <strong>{sexo}</strong>
+          <br />
+          <strong>Reino Homeopático:</strong> {reino}
+        </div>
+      )}
+    </div>
+  );
+}
