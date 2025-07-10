@@ -17,7 +17,6 @@ export default function App() {
     const dia = parseInt(partes[2], 10);
 
     const resultado = obterReinoPessoal(dia, mes);
-    console.log(`🔍 Dia: ${dia}, Mês: ${mes}, Resultado: ${resultado}`);
     setReino(resultado);
   };
 
