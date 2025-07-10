@@ -6,7 +6,7 @@ export default function App() {
   const [data, setData] = useState("");
   const [local, setLocal] = useState("");
   const [sexo, setSexo] = useState("");
-  const [resultado, setResultado] = useState<string | null>(null);
+  const [reino, setReino] = useState<string | null>(null);
 
   const handleConsulta = () => {
     if (!data) return;
@@ -16,19 +16,14 @@ export default function App() {
     const mes = parseInt(partes[1], 10);
     const dia = parseInt(partes[2], 10);
 
-    const reino = obterReinoPessoal(dia, mes);
-    console.log("DEBUG:", { dia, mes, reino }); // ← Para testar se a função funciona
-
-    const frase = `Reino Pessoal: ${reino} | Nome: ${nome}, Nascimento: ${dia
-      .toString()
-      .padStart(2, "0")}/${mes.toString().padStart(2, "0")}/${ano}, Local: ${local}, Sexo: ${sexo}`;
-
-    setResultado(frase);
+    const resultado = obterReinoPessoal(dia, mes);
+    console.log("DEBUG:", { dia, mes, resultado });
+    setReino(resultado);
   };
 
   return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>H369 – Consulta Homeopática</h1>
+    <div style={{ padding: "2rem", textAlign: "left" }}>
+      <h1>H369 - Consulta Homeopática</h1>
       <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
 
       <input
@@ -68,9 +63,10 @@ export default function App() {
         Consultar
       </button>
 
-      {resultado && (
-        <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
-          <strong>{resultado}</strong>
+      {reino && (
+        <div style={{ marginTop: "2rem", fontSize: "1.1rem" }}>
+          <strong>Reino Pessoal:</strong> {reino} <br />
+          <strong>Nome:</strong> {nome}, <strong>Nascimento:</strong> {data}, <strong>Local:</strong> {local}, <strong>Sexo:</strong> {sexo}
         </div>
       )}
     </div>
