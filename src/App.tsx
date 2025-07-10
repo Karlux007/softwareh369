@@ -48,6 +48,7 @@ return (
 
     {reino && (
       <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
+        Resultado simulado para <strong>{nome}</strong>, nascido em <strong>{local}</strong>, sexo <strong>{sexo}</strong><br />
         <strong>Reino Homeopático:</strong> {reino}
       </div>
     )}
