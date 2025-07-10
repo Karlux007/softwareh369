@@ -16,14 +16,14 @@ export default function App() {
     const mes = parseInt(partes[1], 10);
     const dia = parseInt(partes[2], 10);
 
-     const resultado = obterReinoPessoal(dia, mes);
-  console.log("🧪 Debug:", { dia, mes, resultado });
+    const resultado = obterReinoPessoal(dia, mes);
+    console.log("🧪 Debug:", { dia, mes, resultado });
 
-  setReino(resultado);
-};
+    setReino(resultado);
+  };
 
   return (
-    <div style={{ padding: "2rem", textAlign: "left" }}>
+    <div style={{ padding: "2rem", textAlign: "left", maxWidth: "600px", margin: "auto" }}>
       <h1>H369 - Consulta Homeopática</h1>
       <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
 
@@ -65,9 +65,12 @@ export default function App() {
       </button>
 
       {reino && (
-        <div style={{ marginTop: "2rem", fontSize: "1.1rem" }}>
+        <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
           <strong>Reino Pessoal:</strong> {reino} <br />
-          <strong>Nome:</strong> {nome}, <strong>Nascimento:</strong> {data}, <strong>Local:</strong> {local}, <strong>Sexo:</strong> {sexo}
+          <strong>Nome:</strong> {nome} <br />
+          <strong>Nascimento:</strong> {data} <br />
+          <strong>Local:</strong> {local} <br />
+          <strong>Sexo:</strong> {sexo}
         </div>
       )}
     </div>
