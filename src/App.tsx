@@ -6,7 +6,7 @@ export default function App() {
   const [data, setData] = useState("");
   const [local, setLocal] = useState("");
   const [sexo, setSexo] = useState("");
-  const [reino, setReino] = useState<string | null>(null);
+  const [resultado, setResultado] = useState<string | null>(null);
 
   const handleConsulta = () => {
     if (!data) return;
@@ -16,8 +16,11 @@ export default function App() {
     const mes = parseInt(partes[1], 10);
     const dia = parseInt(partes[2], 10);
 
-    const resultado = obterReinoPessoal(dia, mes);
-    setReino(resultado);
+    const reino = obterReinoPessoal(dia, mes);
+    const frase = `Reino Pessoal: ${reino} | Nome: ${nome}, Nascimento: ${dia.toString().padStart(2, "0")}/${mes
+      .toString()
+      .padStart(2, "0")}/${ano}, Local: ${local}, Sexo: ${sexo}`;
+    setResultado(frase);
   };
 
   return (
@@ -62,9 +65,9 @@ export default function App() {
         Consultar
       </button>
 
-      {reino && (
+      {resultado && (
         <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
-          <strong>Reino Homeopático:</strong> {reino}
+          <strong>{resultado}</strong>
         </div>
       )}
     </div>
