@@ -11,10 +11,9 @@ export default function App() {
   const handleConsulta = () => {
     if (!data) return;
 
-    const partes = data.split("-");
-    const ano = parseInt(partes[0], 10);
-    const mes = parseInt(partes[1], 10);
-    const dia = parseInt(partes[2], 10);
+    console.log("Data bruta:", data); // 👈 Mostra a data recebida do input
+
+    const [ano, mes, dia] = data.split("-").map((n) => parseInt(n, 10));
 
     const resultado = obterReinoPessoal(dia, mes);
     setReino(resultado);
