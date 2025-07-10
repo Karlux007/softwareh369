@@ -16,10 +16,11 @@ export default function App() {
     const mes = parseInt(partes[1], 10);
     const dia = parseInt(partes[2], 10);
 
-    const resultado = obterReinoPessoal(dia, mes);
-    console.log("DEBUG:", { dia, mes, resultado });
-    setReino(resultado);
-  };
+     const resultado = obterReinoPessoal(dia, mes);
+  console.log("🧪 Debug:", { dia, mes, resultado });
+
+  setReino(resultado);
+};
 
   return (
     <div style={{ padding: "2rem", textAlign: "left" }}>
