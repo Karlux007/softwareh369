@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>H369 - Consulta Homeopática</h1>
+      <h1>H369 – Consulta Homeopática</h1>
       <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
 
       <input
