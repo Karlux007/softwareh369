@@ -17,9 +17,12 @@ export default function App() {
     const dia = parseInt(partes[2], 10);
 
     const reino = obterReinoPessoal(dia, mes);
-    const frase = `Reino Pessoal: ${reino} | Nome: ${nome}, Nascimento: ${dia.toString().padStart(2, "0")}/${mes
+    console.log("DEBUG:", { dia, mes, reino }); // ← Para testar se a função funciona
+
+    const frase = `Reino Pessoal: ${reino} | Nome: ${nome}, Nascimento: ${dia
       .toString()
-      .padStart(2, "0")}/${ano}, Local: ${local}, Sexo: ${sexo}`;
+      .padStart(2, "0")}/${mes.toString().padStart(2, "0")}/${ano}, Local: ${local}, Sexo: ${sexo}`;
+
     setResultado(frase);
   };
 
