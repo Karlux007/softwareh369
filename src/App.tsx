@@ -1,75 +1,41 @@
 import { useState } from "react";
-import { obterReinoPessoal } from "./utils/reinoPessoal";
+import { tabelaReinosPessoais } from "./utils/tabelaReinosPessoais";
+
+function calcularReinoPessoal(dia: number, mes: number): string {
+  const chave = `${dia.toString().padStart(2, "0")}-${mes.toString().padStart(2, "0")}`;
+  return tabelaReinosPessoais[chave] || "Desconhecido";
+}
+
+function calcularReinoImaterial(nome: string): string {
+  const valor = nome.length % 3;
+  return valor === 0 ? "Mineral" : valor === 1 ? "Animal" : "Vegetal";
+}
+
+function calcularReinoDoNome(nome: string): string {
+  const total = nome
+    .toLowerCase()
+    .replace(/[^a-z]/g, "")
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const mod = total % 3;
+  return mod === 0 ? "Vegetal" : mod === 1 ? "Mineral" : "Animal";
+}
 
 export default function App() {
-  const [nome, setNome] = useState("");
-  const [data, setData] = useState("");
-  const [local, setLocal] = useState("");
-  const [sexo, setSexo] = useState("");
-  const [reino, setReino] = useState<string | null>(null);
+  const [entradas, setEntradas] = useState(
+    Array.from({ length: 11 }, () => ({ nome: "", data: "", id: "" }))
+  );
+  const [resultados, setResultados] = useState<string[]>([]);
 
-  const handleConsulta = () => {
-    if (!data) return;
-
-    const partes = data.split("-");
-    const ano = parseInt(partes[0], 10);
-    const mes = parseInt(partes[1], 10);
-    const dia = parseInt(partes[2], 10);
-
-console.log("Dia:", dia, "Mês:", mes, "Resultado:", resultado);
-    setReino(resultado);
+  const handleChange = (index: number, campo: string, valor: string) => {
+    const novas = [...entradas];
+    novas[index][campo] = valor;
+    setEntradas(novas);
   };
 
-  return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>H369 - Consulta Homeopática</h1>
-      <p>Insere os teus dados para descobrir o teu Reino Homeopático</p>
-
-      <input
-        type="text"
-        placeholder="Nome completo"
-        value={nome}
-        onChange={(e) => setNome(e.target.value)}
-        style={{ margin: "5px" }}
-      />
-
-      <input
-        type="date"
-        value={data}
-        onChange={(e) => setData(e.target.value)}
-        style={{ margin: "5px" }}
-      />
-
-      <input
-        type="text"
-        placeholder="Local de nascimento"
-        value={local}
-        onChange={(e) => setLocal(e.target.value)}
-        style={{ margin: "5px" }}
-      />
-
-      <select
-        value={sexo}
-        onChange={(e) => setSexo(e.target.value)}
-        style={{ margin: "5px" }}
-      >
-        <option value="">Seleciona o sexo</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Feminino">Feminino</option>
-      </select>
-
-      <button onClick={handleConsulta} style={{ margin: "5px" }}>
-        Consultar
-      </button>
-
-      {reino && (
-        <div style={{ marginTop: "2rem", fontSize: "1.2rem" }}>
-          <p><strong>Reino Homeopático:</strong> {reino}</p>
-          <p>
-            Resultado gerado para {nome}, nascido em {local}, sexo {sexo}
-          </p>
-        </div>
-      )}
-    </div>
-  );
-}
+  const calcular = () => {
+    const res = entradas.map((entrada, i) => {
+      const nome = entrada.nome.trim();
+      const data = entrada.data.trim();
+      const id = entrada.id.trim();
+      if (!nome || !data) return `${id |
