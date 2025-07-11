@@ -38,4 +38,28 @@ export default function App() {
       const nome = entrada.nome.trim();
       const data = entrada.data.trim();
       const id = entrada.id.trim();
-      if (!nome || !data) return `${id |
+      if (!nome || !data) return `${id || "(sem identificação)"}: Dados incompletos.`;
+
+      const [ano, mes, dia] = data.split("-").map(Number); // yyyy-mm-dd
+      const reinoDoNome = calcularReinoDoNome(nome);
+
+      if (i === 10) {
+        return `${id || "(Bloco 11)"}: Reino do Nome: ${reinoDoNome}`;
+      } else {
+        const reinoPessoal = calcularReinoPessoal(dia, mes);
+        const reinoImaterial = calcularReinoImaterial(nome);
+        return `${id || "(Bloco " + (i + 1) + ")"}: Reino Pessoal: ${reinoPessoal}, Reino Imaterial: ${reinoImaterial}, Reino do Nome: ${reinoDoNome}`;
+      }
+    });
+
+    setResultados(res);
+  };
+
+  return (
+    <div className="p-4 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Consulta Reinos H369</h1>
+      {entradas.map((entrada, i) => (
+        <div key={i} className="mb-4 border-b pb-2">
+          <input
+            type="text"
+            placeholder
