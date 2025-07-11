@@ -62,4 +62,39 @@ export default function App() {
         <div key={i} className="mb-4 border-b pb-2">
           <input
             type="text"
-            placeholder
+            placeholder="Identificação (ex: eu, filho...)"
+            value={entrada.id}
+            onChange={(e) => handleChange(i, "id", e.target.value)}
+            className="border p-2 m-1"
+          />
+          <input
+            type="text"
+            placeholder="Nome completo"
+            value={entrada.nome}
+            onChange={(e) => handleChange(i, "nome", e.target.value)}
+            className="border p-2 m-1"
+          />
+          <input
+            type="date"
+            value={entrada.data}
+            onChange={(e) => handleChange(i, "data", e.target.value)}
+            className="border p-2 m-1"
+          />
+        </div>
+      ))}
+
+      <button
+        onClick={calcular}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Consultar
+      </button>
+
+      <div className="mt-6 whitespace-pre-wrap">
+        {resultados.map((res, i) => (
+          <p key={i}>{res}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
